@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 def import_data(fname):
     _X = np.genfromtxt(fname, delimiter=" ")
     _X = np.delete(_X, 0, 1)
-#    _L = np.genfromtxt(fname, delimiter=" ", dtype='S10', usecols=(0))
-    return _X
+    _L = np.genfromtxt(fname, delimiter=" ", dtype='S10', usecols=(0))
+    return _X, _L
 
 
 def norms(l, X):
@@ -40,8 +40,8 @@ def norms(l, X):
 
 def train():
     filename = "animals"
-    X = import_data(filename)
-    print(X)
+    X, L = import_data(filename)
+    print(X, L)
     norm = norms(2, X)
     print(norm)
     return
@@ -49,9 +49,7 @@ def train():
 
 if __name__ == "__main__":
     train()
-    N = 5
-    pos = np.random.multivariate_normal([0, 0], [[1, 0], [0, 1]], 2 * N)
-    neg = np.random.multivariate_normal([2, 2], [[1, 0], [0, 1]], 2 * N)
-    plt.scatter(neg[:, 0], neg[:, 1], c='r')
-    plt.scatter(pos[:, 0], pos[:, 1], c='b')
-    plt.show()
+
+#    plt.scatter(neg[:, 0], neg[:, 1], c='r')
+#    plt.scatter(pos[:, 0], pos[:, 1], c='b')
+#    plt.show()
