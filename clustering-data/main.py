@@ -34,7 +34,7 @@ def norms(l, X):
         for i in range(0, a):
             norm[i, :] = np.sqrt(np.sum(X[i, :]*X[i, :]))
             norm22[i, :] = X[i, :] / norm[i, :]
-            print(norm22)
+    pass
 
     return norm
 
@@ -43,9 +43,10 @@ def train(fname):
 
     X, L = import_data(fname)
 #    print(X, L)
-    norm = norms(22, X)
-    print(norm)
-    plt.scatter(X[:, 6], L)
+    norm = norms(2, X)
+    print(norm[1, :])
+    print(np.shape(X))
+    plt.scatter(norm, L)
     plt.show()
     return
 
@@ -53,8 +54,10 @@ def validation():
 
     return
 
+
 def test():
     return
+
 
 def evaluation():
     # Precision (P): Precision tells us about all the correct predictions out of total positive predictions
@@ -63,9 +66,11 @@ def evaluation():
 
     return
 
+
 def sim(p, q):
-    score = numpy.dot(p,q) / (numpy.linalg.norm(p) * numpy.linalg.norm(q))
+    score = np.dot(p,q) / (np.linalg.norm(p) * np.linalg.norm(q))
     return score
+
 
 def predict(x, k):
     L = [(y, sim(x, z)) for (y,z) in train_data]
@@ -77,21 +82,24 @@ def predict(x, k):
     else:
         return -1
 
+
 def accuracy():
     corrects = 0
     k = 5
-    for (y,x) in test_data:
+    for (y, x) in test_data:
         if y == predict(x, k):
             corrects += 1
     accuracy = float(corrects) / float(len(test_data))
-    print ("Accuracy =", accuracy)
+    print("Accuracy =", accuracy)
     return accuracy
 
+
 if __name__ == "__main__":
-    train("animals")
-#    train("countries")
-#    train("fruits")
-#    train("veggies")
+    lables = ["animals", "countries", "fruits", "veggies"]
+    train(lables[0])
+    train(lables[1])
+    train(lables[2])
+    train(lables[3])
 
 #    plt.scatter(neg[:, 0], neg[:, 1], c='r')
 #    plt.scatter(pos[:, 0], pos[:, 1], c='b')
